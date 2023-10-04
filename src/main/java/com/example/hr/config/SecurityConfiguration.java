@@ -1,12 +1,9 @@
 package com.example.hr.config;
 
-// import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-// import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
-// import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -51,8 +48,7 @@ public class SecurityConfiguration {
         .authorizeHttpRequests()
         .requestMatchers(
                 "/api/mfa/auth/**",
-                "/api/mfa/orgchart/create",
-                "/api/mfa/userprofile/create",
+                "/api/users/**",
                 "/v2/api-docs",
                 "/v3/api-docs",
                 "/v3/api-docs/**",
@@ -70,9 +66,9 @@ public class SecurityConfiguration {
         .requestMatchers("/api/mfa/management/**").hasAnyRole(ADMIN.name(), MANAGER.name())
         .requestMatchers("/api/mfa/orgchart/create/**").hasAnyRole(ADMIN.name(), MANAGER.name())
         .requestMatchers("/api/mfa/userprofile/create/**").hasAnyRole(ADMIN.name(), MANAGER.name())
+            .requestMatchers("/api/mfa/user/get/**").hasAnyRole(ADMIN.name(), MANAGER.name())
 
-
-        .requestMatchers(GET, "/api/mfa/management/**").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())
+        .requestMatchers(GET, "/api/mfa/user/get/**").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())
         .requestMatchers(POST, "/api/mfa/management/**").hasAnyAuthority(ADMIN_CREATE.name(), MANAGER_CREATE.name())
         .requestMatchers(PUT, "/api/mfa/management/**").hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name())
         .requestMatchers(DELETE, "/api/mfa/management/**").hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name())

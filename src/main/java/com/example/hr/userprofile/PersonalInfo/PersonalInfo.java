@@ -1,24 +1,22 @@
-package com.example.hr.UserProfile.PersonalInformationModelRepository;
-
-import java.sql.Date;
-import java.sql.Timestamp;
+package com.example.hr.userprofile.PersonalInfo;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.sql.Timestamp;
+import java.util.Date;
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "personalInformation")
-public class PersonalInformationModel {
+@Table(name = "personalinfo")
+public class PersonalInfo {
     @Id
     @GeneratedValue
     private Integer id;
