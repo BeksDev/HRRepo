@@ -5,6 +5,7 @@ import com.example.hr.User.UserRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
@@ -38,14 +39,51 @@ public class UserProfileController {
 
 
         UserProfile userProfile = new UserProfile(profileData);
-//        userProfile.setUser(user);
         user.setUserProfile(userProfile);
 
         userProfileRepository.save(userProfile);
         userRepository.save(user);
 
-//        return new ResponseEntity<>(user, HttpStatus.CREATED);
         return userProfile;
+    }
+
+    @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('admin:update')")
+    public ResponseEntity<UserProfile> updateUserProfile(
+            @PathVariable Integer id,
+            @RequestBody UserProfileRequest profileData) {
+        Optional<User> userOptional = userRepository.findById(id);
+
+        if (userOptional.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        User user = userOptional.get();
+
+        if (user.getUserProfile() == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        UserProfile userProfile = user.getUserProfile();
+
+        userProfile.setCareer(profileData.getCareer());
+        userProfile.setFamilyMember(profileData.getFamilyMembers());
+        userProfile.setPersonalInfo(profileData.getPersonalInfo());
+        userProfile.setAddress(profileData.getAddress());
+        userProfile.setEducationl(profileData.getEducation());
+        userProfile.setRank(profileData.getRank());
+        userProfile.setDiscipline(profileData.getDiscipline());
+        userProfile.setAditionalFunction(profileData.getAditionalFunction());
+        userProfile.setEwards(profileData.getEwards());
+        userProfile.setDiscipline(profileData.getDiscipline());
+        userProfile.setDocuments(profileData.getDocuments());
+        userProfile.setPassports(profileData.getPassports());
+        userProfile.setHealthInsurence(profileData.getHealthInsurence());
+
+
+        userProfileRepository.save(userProfile);
+
+        return ResponseEntity.ok(userProfile);
     }
 
 

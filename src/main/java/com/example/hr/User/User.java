@@ -1,5 +1,7 @@
 package com.example.hr.User;
 
+import com.example.hr.MFA.Consulate.Consulate;
+import com.example.hr.MFA.Mfa;
 import com.example.hr.userprofile.UserProfile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -27,11 +29,14 @@ import com.example.hr.token.Token;
 public class User implements UserDetails {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
   private String firstname;
   private String lastname;
   private String email;
+//  @ManyToOne(cascade = CascadeType.ALL)
+//  @JoinColumn(name = "fk_consulate_id")
+//  private Consulate consulate;
   @OneToOne
   @JoinColumn(name = "userprofile_id")
   private UserProfile userProfile;

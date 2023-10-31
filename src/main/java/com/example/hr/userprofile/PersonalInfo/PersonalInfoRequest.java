@@ -1,24 +1,14 @@
 package com.example.hr.userprofile.PersonalInfo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.util.Date;
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Getter
 @Setter
-@Entity
-@Table(name = "personalinfo")
-public class PersonalInfo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
-    private Integer id;
+public class PersonalInfoRequest {
     private Integer image;
     private Integer idNumber;
     private Integer combo;

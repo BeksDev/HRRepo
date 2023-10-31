@@ -73,15 +73,6 @@ public class SecurityConfiguration {
         .requestMatchers(PUT, "/api/mfa/management/**").hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name())
         .requestMatchers(DELETE, "/api/mfa/management/**").hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name())
 
-
-       /* .requestMatchers("/api/mfa/admin/**").hasRole(ADMIN.name())
-
-        .requestMatchers(GET, "/api/mfa/admin/**").hasAuthority(ADMIN_READ.name())
-        .requestMatchers(POST, "/api/mfa/admin/**").hasAuthority(ADMIN_CREATE.name())
-        .requestMatchers(PUT, "/api/mfa/admin/**").hasAuthority(ADMIN_UPDATE.name())
-        .requestMatchers(DELETE, "/api/mfa/admin/**").hasAuthority(ADMIN_DELETE.name())*/
-
-
         .anyRequest()
           .authenticated()
         .and()
